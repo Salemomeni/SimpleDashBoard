@@ -1,11 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import { Box } from "@mui/material";
-import Sidebar from "@/components/sideBar";
-
-
-
+import DashboardShell from "@/components/DashBoardShell/DashboardShell";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,59 +18,15 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-
- 
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable}`}
+    >
       <body>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            minHeight: "100vh",
-            overflowY: "auto",
-            scrollbarWidth: "none",
-            "&::-webkit-scrollbar": {
-              display: "none",
-            },
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              // height: "10vh",
-              width: "20vw",
-              backgroundColor: "rgb(28, 37, 54)",
-            }}
-          >
-            <Sidebar />
-          </Box>
-
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              width: "80vw",
-              backgroundColor: "#ffffff",
-              // height: "10vh",
-            }}
-          >
-            <Navbar />
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                marginTop: "38px",
-                width: "100%",
-               height: "100%",
-               px:3
-              }}
-            >
-              {children}
-            </Box>
-          </Box>
-        </Box>
+        <DashboardShell>
+          {children}
+        </DashboardShell>
       </body>
     </html>
   );

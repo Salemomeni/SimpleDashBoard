@@ -67,42 +67,45 @@ export default function Home() {
       </Box>
 
       <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          width: "100%",
-          height: "100%",
-          padding: "1rem",
-          gap: 10,
-        }}
-      >
-        <Box
-          sx={{
-            width: "60%",
-            height: "100%",
-            borderRadius: "17px",
-            backgroundColor: "#ffffff",
-            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
-          }}
-        >
-          <SalesChart />
-        </Box>
-        <Box
-          sx={{
-            width: "35%",
-            height: "100%",
-            borderRadius: "17px",
-            backgroundColor: "#ffffff",
-            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
-            alignContent: "center",
-            justifyContent: "center",
-            marginTop: "-10px",
-          }}
-        >
-          <TrafficChart />
+  sx={{
+    display: "flex",
+    flexDirection: { xs: "column", md: "row" },
+    width: "100%",
+    height: "100%",
+    padding: "1rem",
+    gap: 2,
+  }}
+>
+  {/* Sales Chart */}
+  <Box
+    sx={{
+      width: { xs: "100%", md: "60%" },
+      height: "100%",
+      borderRadius: "17px",
+      backgroundColor: "#ffffff",
+      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+    }}
+  >
+    <SalesChart />
+  </Box>
 
-        </Box>
-      </Box>
+  {/* Traffic Chart */}
+  <Box
+    sx={{
+      width: { xs: "100%", md: "35%" },
+      height: "100%",
+      borderRadius: "17px",
+      backgroundColor: "#ffffff",
+      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: { xs: 0, md: "-10px" },
+    }}
+  >
+    <TrafficChart />
+  </Box>
+</Box>
     </Box>
   );
 }

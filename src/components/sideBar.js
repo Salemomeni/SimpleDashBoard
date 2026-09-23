@@ -1,6 +1,15 @@
-import { Error, HowToReg, Login, People, Person, SettingsAccessibility, SignalCellular0Bar } from "@mui/icons-material";
+import {
+  Error,
+  HowToReg,
+  Login,
+  People,
+  Person,
+  SettingsAccessibility,
+} from "@mui/icons-material";
+
 import {
   Box,
+  Drawer,
   List,
   ListItem,
   ListItemButton,
@@ -8,20 +17,22 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
+
+import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
 import Image from "next/image";
 
-export default function Sidebar() {
+export default function Sidebar({ open, onClose }) {
   const menuItems = [
-    { name: "Overview", icon: <SignalCellularAltIcon size={18} /> },
-    { name: "Customers", icon: <People size={18} /> },
-    { name: "Account", icon: <Person size={18} /> },
-    { name: "Settings", icon: <SettingsAccessibility size={18} /> },
-    { name: "Login", icon: <Login size={18} /> },
-    { name: "Register", icon: <HowToReg size={18} /> },
-    { name: "Error", icon: <Error size={18} /> },
+    { name: "Overview", icon: <SignalCellularAltIcon /> },
+    { name: "Customers", icon: <People /> },
+    { name: "Account", icon: <Person /> },
+    { name: "Settings", icon: <SettingsAccessibility /> },
+    { name: "Login", icon: <Login /> },
+    { name: "Register", icon: <HowToReg /> },
+    { name: "Error", icon: <Error /> },
   ];
-  return (
+
+  const sidebarContent = (
     <Box
       sx={{
         px: 2,
@@ -29,10 +40,10 @@ export default function Sidebar() {
         display: "flex",
         gap: "1rem",
         flexDirection: "column",
+        width: "220px",
       }}
     >
       <Image
-        objectFit="cover"
         src="/images/Logo1.png"
         width={80}
         height={80}
@@ -69,23 +80,27 @@ export default function Sidebar() {
           Product Designer
         </Typography>
       </Box>
+
       <List>
         {menuItems.map((item) => (
           <ListItem key={item.name} disablePadding>
             <ListItemButton
+              onClick={onClose}
               sx={{
                 height: "35px",
                 borderRadius: "15px",
                 marginBottom: "0.8rem",
                 alignItems: "center",
                 display: "flex",
-               
+
                 "&:hover": {
                   backgroundColor: "rgb(37, 46, 62)",
                   color: "#ffffff",
+
                   "& .MuiListItemText-primary": {
                     color: "#ffffff",
                   },
+
                   "& .MuiListItemIcon-root": {
                     color: "rgb(248, 130, 5)",
                   },
@@ -96,6 +111,7 @@ export default function Sidebar() {
                 sx={{
                   color: "rgb(144, 152, 163)",
                   fontSize: "18px",
+                  minWidth: "35px",
                 }}
               >
                 {item.icon}
@@ -108,7 +124,6 @@ export default function Sidebar() {
                     sx: {
                       color: "rgb(144, 152, 163)",
                       fontSize: "0.8rem",
-                    //   marginLeft: "-10px",
                       marginTop: "3px",
                     },
                   },
@@ -119,5 +134,30 @@ export default function Sidebar() {
         ))}
       </List>
     </Box>
+  );
+
+  return (
+    <>
+      {/* Desktop Sidebar */}
+      <Box
+        sx={{
+          display: { xs: "none", md: "flex" },
+        }}
+      >
+        {sidebarContent}
+      </Box>
+
+      {/* Mobile / Tablet Sidebar */}
+      <Drawer
+        anchor="left"
+        open={open}
+        onClose={onClose}
+        sx={{
+          display: { xs: "block", md: "none" },
+        }}
+      >
+        {sidebarContent}
+      </Drawer>
+    </>
   );
 }
